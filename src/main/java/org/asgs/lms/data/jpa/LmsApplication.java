@@ -24,9 +24,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
-public class SampleDataJpaApplication {
+public class LmsApplication {
 
-  public static void main1(String[] args) throws Exception {
-    SpringApplication.run(SampleDataJpaApplication.class, args);
-  }
+	public static void main(String[] args) throws Exception {
+		SpringApplication.run(LmsApplication.class, args);
+	}
+
 }
