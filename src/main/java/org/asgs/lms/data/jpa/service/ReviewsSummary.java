@@ -20,6 +20,5 @@ import org.asgs.lms.data.jpa.domain.Rating;
 
 public interface ReviewsSummary {
 
-	long getNumberOfReviewsWithRating(Rating rating);
-
+  long getNumberOfReviewsWithRating(Rating rating);
 }

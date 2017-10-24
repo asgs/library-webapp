@@ -15,8 +15,8 @@
  */
 package org.asgs.lms.data.jpa.service;
 
-import java.util.List;
-
+import org.asgs.lms.data.jpa.SampleDataJpaApplication;
+import org.asgs.lms.data.jpa.domain.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,48 +26,40 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import org.asgs.lms.data.jpa.SampleDataJpaApplication;
-import org.asgs.lms.data.jpa.domain.City;
-import org.asgs.lms.data.jpa.domain.Hotel;
-import org.asgs.lms.data.jpa.domain.HotelSummary;
-import org.asgs.lms.data.jpa.domain.Rating;
-import org.asgs.lms.data.jpa.domain.RatingCount;
+import java.util.List;
 
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 /**
  * Integration tests for {@link HotelRepository}.
- * 
+ *
  * @author Oliver Gierke
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SampleDataJpaApplication.class)
 public class HotelRepositoryIntegrationTests {
 
-	@Autowired
-	CityRepository cityRepository;
-	@Autowired
-	HotelRepository repository;
+  @Autowired CityRepository cityRepository;
+  @Autowired HotelRepository repository;
 
-	@Test
-	public void executesQueryMethodsCorrectly() {
-		City city = this.cityRepository
-				.findAll(new PageRequest(0, 1, Direction.ASC, "name")).getContent()
-				.get(0);
-		assertThat(city.getName(), is("Atlanta"));
+  @Test
+  public void executesQueryMethodsCorrectly() {
+    City city =
+        this.cityRepository
+            .findAll(new PageRequest(0, 1, Direction.ASC, "name"))
+            .getContent()
+            .get(0);
+    assertThat(city.getName(), is("Atlanta"));
 
-		Page<HotelSummary> hotels = this.repository.findByCity(city, new PageRequest(0,
-				10, Direction.ASC, "name"));
-		Hotel hotel = this.repository.findByCityAndName(city, hotels.getContent().get(0)
-				.getName());
-		assertThat(hotel.getName(), is("Doubletree"));
+    Page<HotelSummary> hotels =
+        this.repository.findByCity(city, new PageRequest(0, 10, Direction.ASC, "name"));
+    Hotel hotel = this.repository.findByCityAndName(city, hotels.getContent().get(0).getName());
+    assertThat(hotel.getName(), is("Doubletree"));
 
-		List<RatingCount> counts = this.repository.findRatingCounts(hotel);
-		assertThat(counts, hasSize(1));
-		assertThat(counts.get(0).getRating(), is(Rating.AVERAGE));
-		assertThat(counts.get(0).getCount(), is(greaterThan(1L)));
-	}
+    List<RatingCount> counts = this.repository.findRatingCounts(hotel);
+    assertThat(counts, hasSize(1));
+    assertThat(counts.get(0).getRating(), is(Rating.AVERAGE));
+    assertThat(counts.get(0).getCount(), is(greaterThan(1L)));
+  }
 }

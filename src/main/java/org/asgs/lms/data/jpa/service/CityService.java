@@ -16,18 +16,16 @@
 
 package org.asgs.lms.data.jpa.service;
 
+import org.asgs.lms.data.jpa.domain.City;
+import org.asgs.lms.data.jpa.domain.HotelSummary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import org.asgs.lms.data.jpa.domain.City;
-import org.asgs.lms.data.jpa.domain.HotelSummary;
-
 public interface CityService {
 
-	Page<City> findCities(CitySearchCriteria criteria, Pageable pageable);
+  Page<City> findCities(CitySearchCriteria criteria, Pageable pageable);
 
-	City getCity(String name, String country);
+  City getCity(String name, String country);
 
-	Page<HotelSummary> getHotels(City city, Pageable pageable);
-
+  Page<HotelSummary> getHotels(City city, Pageable pageable);
 }

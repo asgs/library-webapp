@@ -17,5 +17,9 @@
 package org.asgs.lms.data.jpa.domain;
 
 public enum Rating {
-	TERRIBLE, POOR, AVERAGE, GOOD, EXCELLENT,
+  TERRIBLE,
+  POOR,
+  AVERAGE,
+  GOOD,
+  EXCELLENT,
 }

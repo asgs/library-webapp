@@ -16,19 +16,17 @@
 
 package org.asgs.lms.data.jpa.service;
 
+import org.asgs.lms.data.jpa.domain.Hotel;
+import org.asgs.lms.data.jpa.domain.Review;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.Repository;
 
-import org.asgs.lms.data.jpa.domain.Hotel;
-import org.asgs.lms.data.jpa.domain.Review;
-
 interface ReviewRepository extends Repository<Review, Long> {
 
-	Page<Review> findByHotel(Hotel hotel, Pageable pageable);
+  Page<Review> findByHotel(Hotel hotel, Pageable pageable);
 
-	Review findByHotelAndIndex(Hotel hotel, int index);
+  Review findByHotelAndIndex(Hotel hotel, int index);
 
-	Review save(Review review);
-
+  Review save(Review review);
 }
