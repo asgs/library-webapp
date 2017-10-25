@@ -29,5 +29,6 @@ book_id varchar(20) references books(id) not null,
 user_id varchar(20) references users(id) not null,
 borrowed_date bigint not null, -- in Epoch milli seconds.
 expiry_date bigint not null, -- same as above.
-status char(1) not null -- possible values are B (for Borrowed), and R (for Returned).
+status char(1) not null, -- possible values are B (for Borrowed), and R (for Returned).
+primary key(book_id, user_id)
 );
