@@ -7,8 +7,7 @@ import java.io.Serializable;
 @Entity
 public class Book implements Serializable {
   // TODO - add necessary JPA annotations after finalizing the DB Schema.
-  @Id
-  private String id;
+  @Id private String id;
   private String name;
   private String author;
   private String edition;
