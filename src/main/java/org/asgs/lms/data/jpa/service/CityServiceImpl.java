@@ -47,7 +47,8 @@ class CityServiceImpl implements CityService {
     String name = criteria.getName();
 
     if (!StringUtils.hasLength(name)) {
-      return this.cityRepository.findAll(null);
+      Pageable p = null;
+      return this.cityRepository.findAll(p);
     }
 
     String country = "";

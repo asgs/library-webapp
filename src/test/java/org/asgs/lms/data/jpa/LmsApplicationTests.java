@@ -4,10 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -21,12 +20,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *
  * @author Oliver Gierke
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = SampleDataJpaApplication.class)
-@WebAppConfiguration
+@RunWith(SpringRunner.class)
+@SpringBootTest
 @ActiveProfiles("scratch")
 // Separate profile for web tests to avoid clashing databases
-public class SampleDataJpaApplicationTests {
+public class LmsApplicationTests {
 
   @Autowired private WebApplicationContext context;
 
@@ -39,7 +37,15 @@ public class SampleDataJpaApplicationTests {
 
   @Test
   public void testHome() throws Exception {
-
-    this.mvc.perform(get("/")).andExpect(status().isOk()).andExpect(content().string("Somerset"));
+    String city = "Bath";
+    String country = "UK";
+    String state = "Somerset";
+    String expected =
+        String.format(
+            "The city of %s in the country %s is located in the state %s", city, country, state);
+    this.mvc
+        .perform(get("/?city=" + city + "&country=" + country))
+        .andExpect(status().isOk())
+        .andExpect(content().string(expected));
   }
 }

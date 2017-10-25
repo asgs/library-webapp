@@ -16,11 +16,13 @@
 
 package org.asgs.lms.data.jpa.web;
 
+import org.asgs.lms.data.jpa.domain.City;
 import org.asgs.lms.data.jpa.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -31,8 +33,12 @@ public class SampleController {
   @RequestMapping("/")
   @ResponseBody
   @Transactional(readOnly = true)
-  public String helloWorld() {
-    return "The city of Bath in the country UK is located in the state "
-        + this.cityService.getCity("Bath", "UK").getState();
+  public String helloWorld(
+      @RequestParam(required = false) String city, @RequestParam(required = false) String country) {
+    String prefix =
+        String.format("The city of %s in the country %s is located in the state ", city, country);
+    City cityObject = this.cityService.getCity(city, country);
+    String responseContent = prefix + (cityObject != null ? cityObject.getState() : "Unknown");
+    return responseContent;
   }
 }
