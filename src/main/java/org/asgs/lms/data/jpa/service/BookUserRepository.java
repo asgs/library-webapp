@@ -10,5 +10,7 @@ public interface BookUserRepository extends Repository<BookUser, Long> {
 
   Page<BookUser> findByUserId(String userId, Pageable pageable);
 
+  Page<BookUser> findByStatus(Character status, Pageable pageable);
+
   Page<BookUser> findByUserIdAndStatus(String userId, Character status, Pageable pageable);
 }
