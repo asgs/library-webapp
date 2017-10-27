@@ -38,12 +38,12 @@ public class User implements Serializable {
     return booksBorrowed;
   }
 
-  public List<Book> getBooksOverdueForReturn() {
-    return booksOverdueForReturn;
-  }
-
   public void setBooksBorrowed(List<Book> booksBorrowed) {
     this.booksBorrowed = booksBorrowed;
+  }
+
+  public List<Book> getBooksOverdueForReturn() {
+    return booksOverdueForReturn;
   }
 
   public void setBooksOverdueForReturn(List<Book> booksOverdueForReturn) {

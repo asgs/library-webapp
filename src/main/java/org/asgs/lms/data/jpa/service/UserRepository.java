@@ -6,9 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.Repository;
 
 public interface UserRepository extends Repository<User, Long> {
-    Page<User> findAll(Pageable pageable);
+  Page<User> findAll(Pageable pageable);
 
-    User findById(String userId);
+  User findById(String userId);
 
-    Page<User> findByName(String name, Pageable pageable);
+  Page<User> findByName(String name, Pageable pageable);
 }

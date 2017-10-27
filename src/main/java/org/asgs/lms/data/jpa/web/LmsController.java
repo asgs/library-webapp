@@ -42,11 +42,14 @@ public class LmsController {
       System.out.println("Book size is " + books.size());
       user.setBooksBorrowed(books);
 
-      /*user.setBooksBorrowed(
-      bookUserRepository
-          .findByIdAndStatus(new BookUserKey(user.getId(), null), 'B', null)
-          .getContent()
-          .toArray(new Book[users.size()]));*/
+      List<BookUser> bookUsersDefaulted =
+          bookUserRepository.findByUserIdAndStatus(user.getId(), 'B', null).getContent();
+      books =
+          bookUsersDefaulted
+              .stream()
+              .map(bookUser -> findBookById(bookUser))
+              .collect(Collectors.toList());
+      user.setBooksOverdueForReturn(books);
     }
     return users;
   }

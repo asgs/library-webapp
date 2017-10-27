@@ -9,8 +9,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "book_users")
 public class BookUser implements Serializable {
-  @EmbeddedId
-  private BookUserKey id;
+  @EmbeddedId private BookUserKey id;
 
   @Column(name = "book_id", insertable = false, updatable = false)
   private String bookId;

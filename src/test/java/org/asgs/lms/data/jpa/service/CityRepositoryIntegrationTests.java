@@ -31,7 +31,7 @@ import static org.junit.Assert.assertThat;
  *
  * @author Oliver Gierke
  */
-//@RunWith(SpringRunner.class)
+// @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CityRepositoryIntegrationTests {
 
