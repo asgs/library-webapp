@@ -9,7 +9,7 @@ import org.springframework.data.repository.Repository;
 public interface BookRepository extends Repository<Book, Long> {
     Page<Book> findAll(Pageable pageable);
 
-    Book findById(Long userId);
+    Book findById(String userId);
 
     Page<Book> findByName(String name, Pageable pageable);
 }

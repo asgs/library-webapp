@@ -2,6 +2,7 @@ package org.asgs.lms.data.jpa.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -14,8 +15,8 @@ public class User implements Serializable {
   @Column(name = "max_book_borrow_count")
   private Integer totalCountOfBooksEligibleToBorrow;
 
-  @Transient private Book[] booksBorrowed;
-  @Transient private Book[] booksOverdueForReturn;
+  @Transient private List<Book> booksBorrowed;
+  @Transient private List<Book> booksOverdueForReturn;
 
   public String getId() {
     return id;
@@ -33,19 +34,19 @@ public class User implements Serializable {
     return totalCountOfBooksEligibleToBorrow;
   }
 
-  public Book[] getBooksBorrowed() {
+  public List<Book> getBooksBorrowed() {
     return booksBorrowed;
   }
 
-  public Book[] getBooksOverdueForReturn() {
+  public List<Book> getBooksOverdueForReturn() {
     return booksOverdueForReturn;
   }
 
-  public void setBooksBorrowed(Book[] booksBorrowed) {
+  public void setBooksBorrowed(List<Book> booksBorrowed) {
     this.booksBorrowed = booksBorrowed;
   }
 
-  public void setBooksOverdueForReturn(Book[] booksOverdueForReturn) {
+  public void setBooksOverdueForReturn(List<Book> booksOverdueForReturn) {
     this.booksOverdueForReturn = booksOverdueForReturn;
   }
 }

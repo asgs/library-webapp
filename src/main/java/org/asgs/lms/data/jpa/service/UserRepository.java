@@ -8,7 +8,7 @@ import org.springframework.data.repository.Repository;
 public interface UserRepository extends Repository<User, Long> {
     Page<User> findAll(Pageable pageable);
 
-    User findById(Long userId);
+    User findById(String userId);
 
     Page<User> findByName(String name, Pageable pageable);
 }
