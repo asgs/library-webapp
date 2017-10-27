@@ -2,6 +2,7 @@ package org.asgs.lms.data.jpa.web;
 
 import org.asgs.lms.data.jpa.domain.Book;
 import org.asgs.lms.data.jpa.domain.User;
+import org.asgs.lms.data.jpa.service.BookRepository;
 import org.asgs.lms.data.jpa.service.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,18 +16,18 @@ import java.util.List;
 @ResponseBody
 public class LmsController {
 
-  @Autowired UserRepository repository;
+  @Autowired UserRepository userRepository;
+  @Autowired BookRepository bookRepository;
 
   @RequestMapping("/books")
   @Transactional(readOnly = true)
   public List<Book> getBooks() {
-    return null; // TODO - Implement a service and call it.
+    return bookRepository.findAll(null).getContent();
   }
 
   @RequestMapping("/users")
   @Transactional(readOnly = true)
-  @ResponseBody
   public List<User> getUsers() {
-    return repository.findAll(null).getContent();
+    return userRepository.findAll(null).getContent();
   }
 }
